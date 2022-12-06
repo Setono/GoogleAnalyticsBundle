@@ -1,0 +1,60 @@
+{
+    "name": "setono/google-analytics-bundle",
+    "description": "Use Google Analytics in your Symfony application",
+    "license": "MIT",
+    "type": "symfony-bundle",
+    "authors": [
+        {
+            "name": "Joachim Løvgaard",
+            "email": "joachim@loevgaard.dk"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "setono/bot-detection-bundle": "^1.9",
+        "setono/google-analytics-measurement-protocol": "1.x-dev",
+        "symfony/config": "^5.4 || ^6.0",
+        "symfony/dependency-injection": "^5.4 || ^6.0",
+        "symfony/http-client": "^5.4 || ^6.0",
+        "symfony/http-foundation": "^5.4 || ^6.0",
+        "symfony/http-kernel": "^5.4 || ^6.0",
+        "symfony/messenger": "^5.4 || ^6.0",
+        "webmozart/assert": "^1.11"
+    },
+    "require-dev": {
+        "matthiasnoback/symfony-dependency-injection-test": "^4.3",
+        "nyholm/psr7": "^1.5",
+        "nyholm/symfony-bundle-test": "^2.0",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.5",
+        "psalm/plugin-phpunit": "^0.18",
+        "psalm/plugin-symfony": "^4.0",
+        "roave/security-advisories": "dev-latest",
+        "setono/code-quality-pack": "^2.2.1"
+    },
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Setono\\GoogleAnalyticsBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Setono\\GoogleAnalyticsBundle\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": false,
+            "ergebnis/composer-normalize": true
+        },
+        "sort-packages": true
+    },
+    "scripts": {
+        "analyse": "psalm",
+        "check-style": "ecs check",
+        "fix-style": "ecs check --fix",
+        "phpspec": "phpspec run",
+        "phpunit": "phpunit"
+    }
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="setono_google_analytics.event_subscriber.dispatch_requests"
+                 class="Setono\GoogleAnalyticsBundle\EventSubscriber\DispatchRequestsSubscriber">
+            <argument type="service" id="setono_google_analytics.command_bus"/>
+            <argument type="service" id="setono_google_analytics.stack.event"/>
+            <argument type="service" id="setono_google_analytics.property_provider.default"/>
+            <argument type="service" id="setono_google_analytics.context.client_id"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="setono_google_analytics.event_subscriber.filter_bots"
+                 class="Setono\GoogleAnalyticsBundle\EventSubscriber\FilterBotsSubscriber">
+            <argument type="service" id="setono_bot_detection.bot_detector.default"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="setono_google_analytics.event_subscriber.filter_empty_user_agent"
+                 class="Setono\GoogleAnalyticsBundle\EventSubscriber\FilterEmptyUserAgentSubscriber">
+            <argument type="service" id="request_stack"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="setono_google_analytics.event_subscriber.store_ga"
+                 class="Setono\GoogleAnalyticsBundle\EventSubscriber\StoreGaSubscriber">
+            <argument type="service" id="setono_google_analytics.context.ga"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+    </services>
+</container>

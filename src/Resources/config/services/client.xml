@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="Setono\GoogleAnalyticsMeasurementProtocol\Client\ClientInterface"
+                 alias="setono_google_analytics.client.default"/>
+
+        <service id="setono_google_analytics.client.default"
+                 class="Setono\GoogleAnalyticsMeasurementProtocol\Client\Client">
+            <call method="setLogger">
+                <argument type="service" id="logger"/>
+            </call>
+        </service>
+    </services>
+</container>
