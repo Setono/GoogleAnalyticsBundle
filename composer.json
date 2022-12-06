@@ -24,6 +24,7 @@
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
+        "kriswallsmith/buzz": "^1.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.3",
         "nyholm/psr7": "^1.5",
         "nyholm/symfony-bundle-test": "^2.0",

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Setono\GoogleAnalyticsBundle\EventSubscriber;
+namespace Setono\GoogleAnalyticsBundle\EventSubscriber\Filter;
 
 use Setono\GoogleAnalyticsBundle\Event\FilterEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
