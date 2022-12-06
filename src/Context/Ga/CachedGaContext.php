@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsBundle\Context\Ga;
 
-use Setono\GoogleAnalyticsBundle\Cookie\Ga;
-
 final class CachedGaContext implements GaContextInterface
 {
     private ?Ga $ga = null;

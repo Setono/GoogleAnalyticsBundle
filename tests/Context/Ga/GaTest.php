@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Setono\GoogleAnalyticsBundle\Tests\Cookie;
+namespace Setono\GoogleAnalyticsBundle\Tests\Context\Ga;
 
 use PHPUnit\Framework\TestCase;
-use Setono\GoogleAnalyticsBundle\Cookie\Ga;
+use Setono\GoogleAnalyticsBundle\Context\Ga\Ga;
 
 final class GaTest extends TestCase
 {

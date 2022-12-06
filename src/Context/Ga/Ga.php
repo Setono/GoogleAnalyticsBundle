@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Setono\GoogleAnalyticsBundle\Cookie;
+namespace Setono\GoogleAnalyticsBundle\Context\Ga;
 
 use Symfony\Component\HttpFoundation\Cookie;
 
