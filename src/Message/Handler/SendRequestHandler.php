@@ -6,9 +6,8 @@ namespace Setono\GoogleAnalyticsBundle\Message\Handler;
 
 use Setono\GoogleAnalyticsBundle\Message\Command\SendRequest;
 use Setono\GoogleAnalyticsMeasurementProtocol\Client\ClientInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-final class SendRequestHandler implements MessageHandlerInterface
+final class SendRequestHandler
 {
     public function __construct(private ClientInterface $client)
     {

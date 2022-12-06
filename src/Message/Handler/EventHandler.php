@@ -9,9 +9,8 @@ use Setono\GoogleAnalyticsBundle\Event\FilterEvent;
 use Setono\GoogleAnalyticsBundle\Event\PopulateEvent;
 use Setono\GoogleAnalyticsBundle\Stack\EventStackInterface;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\Event;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-final class EventHandler implements MessageHandlerInterface
+final class EventHandler
 {
     private EventDispatcherInterface $eventDispatcher;
 
