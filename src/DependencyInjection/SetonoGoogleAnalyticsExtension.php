@@ -17,12 +17,13 @@ final class SetonoGoogleAnalyticsExtension extends Extension implements PrependE
         /**
          * @psalm-suppress PossiblyNullArgument
          *
-         * @var array{properties: array} $config
+         * @var array{properties: array, consent: array{enabled: bool}} $config
          */
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $container->setParameter('setono_google_analytics.properties', $config['properties']);
+        $container->setParameter('setono_google_analytics.consent_enabled', $config['consent']['enabled']);
 
         $loader->load('services.xml');
     }

@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Cookie;
 
 /**
  * This class represents the _ga cookie
+ *
+ * todo Use the setono/google-analytics-cookies library
  */
 final class Ga
 {

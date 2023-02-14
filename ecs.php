@@ -9,4 +9,8 @@ return static function (ECSConfig $config): void {
     $config->paths([
         'src', 'tests'
     ]);
+    $config->skip([
+        'tests/Application/var',
+        'tests/Application/vendor',
+    ]);
 };

@@ -1,0 +1,4 @@
+setono_google_analytics:
+    properties:
+        -   api_secret: '%env(GOOGLE_ANALYTICS_API_SECRET)%'
+            measurement_id: 'G-LWQTNK8RJG'

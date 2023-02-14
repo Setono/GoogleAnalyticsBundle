@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+
+        {{ setono_tag_bag_render_head() }}
+    </head>
+    <body>
+        <button id="consent">Consent</button>
+        {{ setono_tag_bag_render_body_begin() }}
+        {% block body %}{% endblock %}
+        {{ setono_tag_bag_render_body_end() }}
+        {{ setono_tag_bag_render_all() }}
+
+        <script>
+            function consent() {
+                const tags = document.querySelectorAll('script[type="text/plain"]');
+
+                tags.forEach((element) => {
+                    let script = document.createElement('script');
+                    script.setAttribute('src', element.getAttribute('src'));
+
+                    element.replaceWith(script);
+                });
+            }
+
+            addEventListener('DOMContentLoaded', (event) => {
+                document.querySelector('#consent').addEventListener('click', consent);
+            });
+        </script>
+    </body>
+</html>

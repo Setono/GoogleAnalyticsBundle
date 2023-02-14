@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Setono\GoogleAnalyticsBundle\Tests\DependencyInjection;
+namespace Setono\GoogleAnalyticsBundle\Tests\Unit\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Setono\GoogleAnalyticsBundle\DependencyInjection\SetonoGoogleAnalyticsExtension;
@@ -47,5 +47,7 @@ final class SetonoGoogleAnalyticsExtensionTest extends AbstractExtensionTestCase
                 'measurement_id' => 'measurement_id2',
             ],
         ]);
+
+        $this->assertContainerBuilderHasParameter('setono_google_analytics.consent_enabled', true);
     }
 }

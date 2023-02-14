@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Setono\GoogleAnalyticsBundle\Tests\Context\Ga;
+namespace Setono\GoogleAnalyticsBundle\Tests\Unit\Context\Ga;
 
 use PHPUnit\Framework\TestCase;
 use Setono\GoogleAnalyticsBundle\Context\Ga\Ga;
