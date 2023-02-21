@@ -3,40 +3,16 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <!-- Client id context -->
-        <service id="Setono\GoogleAnalyticsBundle\Context\ClientId\ClientIdContextInterface"
-                 alias="setono_google_analytics.context.client_id"/>
-
-        <service id="setono_google_analytics.context.client_id"
-                 alias="setono_google_analytics.context.client_id.ga_based"/>
-
-        <service id="setono_google_analytics.context.client_id.ga_based"
-                 class="Setono\GoogleAnalyticsBundle\Context\ClientId\GaBasedClientIdContext">
-            <argument type="service" id="setono_google_analytics.context.ga"/>
-        </service>
-
         <!-- Ga context -->
         <service id="Setono\GoogleAnalyticsBundle\Context\Ga\GaContextInterface"
                  alias="setono_google_analytics.context.ga"/>
 
         <service id="setono_google_analytics.context.ga"
-                 alias="setono_google_analytics.context.ga.new"/>
-
-        <service id="setono_google_analytics.context.ga.new"
-                 class="Setono\GoogleAnalyticsBundle\Context\Ga\NewGaContext">
-        </service>
+                 alias="setono_google_analytics.context.ga.cookie_based"/>
 
         <service id="setono_google_analytics.context.ga.cookie_based"
-                 class="Setono\GoogleAnalyticsBundle\Context\Ga\CookieBasedGaContext"
-                 decorates="setono_google_analytics.context.ga" decoration-priority="128">
-            <argument type="service" id="setono_google_analytics.context.ga"/>
+                 class="Setono\GoogleAnalyticsBundle\Context\Ga\CookieBasedGaContext">
             <argument type="service" id="request_stack"/>
-        </service>
-
-        <service id="setono_google_analytics.context.ga.cached"
-                 class="Setono\GoogleAnalyticsBundle\Context\Ga\CachedGaContext"
-                 decorates="setono_google_analytics.context.ga" decoration-priority="64">
-            <argument type="service" id="setono_google_analytics.context.ga"/>
         </service>
     </services>
 </container>

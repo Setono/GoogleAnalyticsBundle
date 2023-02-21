@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsBundle\EventSubscriber;
 
-use Setono\GoogleAnalyticsBundle\Context\ClientId\ClientIdContextInterface;
+use Setono\GoogleAnalyticsBundle\Factory\RequestFactoryInterface;
 use Setono\GoogleAnalyticsBundle\Message\Command\SendRequest;
 use Setono\GoogleAnalyticsBundle\Provider\PropertyProviderInterface;
 use Setono\GoogleAnalyticsBundle\Stack\EventStackInterface;
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Body;
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Request;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Messenger\MessageBusInterface;
 
+/**
+ * This service will dispatch any server side events onto the command bus
+ */
 final class DispatchRequestsSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private MessageBusInterface $commandBus,
-        private EventStackInterface $eventStack,
-        private PropertyProviderInterface $propertyProvider,
-        private ClientIdContextInterface $clientIdContext,
+        private readonly MessageBusInterface $commandBus,
+        private readonly EventStackInterface $eventStack,
+        private readonly PropertyProviderInterface $propertyProvider,
+        private readonly RequestFactoryInterface $requestFactory,
     ) {
     }
 
@@ -33,31 +34,18 @@ final class DispatchRequestsSubscriber implements EventSubscriberInterface
 
     public function dispatch(): void
     {
-        if ($this->eventStack->isEmpty()) {
+        $events = $this->eventStack->popServerSide();
+        if ([] === $events) {
             return;
         }
 
         $properties = $this->propertyProvider->getProperties();
 
         foreach ($properties as $property) {
-            foreach ($this->generateRequests($property->apiSecret, $property->measurementId, $this->clientIdContext->getClientId()) as $request) {
+            $requests = $this->requestFactory->createRequests($property->apiSecret, $property->measurementId, $events);
+            foreach ($requests as $request) {
                 $this->commandBus->dispatch(new SendRequest($request));
             }
-        }
-    }
-
-    /**
-     * @return \Generator<array-key, Request>
-     */
-    private function generateRequests(string $apiSecret, string $measurementId, string $clientId): \Generator
-    {
-        $events = $this->eventStack->all();
-
-        while (count($events) > 0) {
-            /** @psalm-suppress MixedArgumentTypeCoercion */
-            $request = new Request($apiSecret, $measurementId, Body::create($clientId)->setEvents(array_splice($events, 0, 25)));
-
-            yield $request;
         }
     }
 }

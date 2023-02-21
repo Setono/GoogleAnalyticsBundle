@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsBundle\EventSubscriber\Tag;
 
-use Setono\Consent\Consent;
+use Setono\Consent\Consents;
 use Setono\GoogleAnalyticsBundle\Provider\PropertyProviderInterface;
 use Setono\TagBag\Tag\ConsentableScriptTag;
 use Setono\TagBag\Tag\InlineScriptTag;
@@ -21,8 +21,7 @@ final class LibrarySubscriber implements EventSubscriberInterface
         private readonly TagBagInterface $tagBag,
         private readonly PropertyProviderInterface $propertyProvider,
         private readonly bool $consentEnabled,
-    )
-    {
+    ) {
     }
 
     public static function getSubscribedEvents(): array
@@ -39,7 +38,7 @@ final class LibrarySubscriber implements EventSubscriberInterface
         }
 
         // By adding this javascript to all pages no matter if we have any properties we make it easier for ourselves
-        // when adding tags in other subscribers, since they will be using the gtag method and therefore we don't
+        // when adding tags in other subscribers, since they will be using the gtag method, and therefore we don't
         // have to check if there are any properties when adding all other tags
         $this->tagBag->add(InlineScriptTag::create('function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date);')
             ->withSection(TagInterface::SECTION_HEAD));
@@ -53,7 +52,7 @@ final class LibrarySubscriber implements EventSubscriberInterface
             $src = sprintf('https://www.googletagmanager.com/gtag/js?id=%s', $properties[0]->measurementId);
 
             if ($this->consentEnabled) {
-                $this->tagBag->add(ConsentableScriptTag::create($src, Consent::CONSENT_STATISTICS));
+                $this->tagBag->add(ConsentableScriptTag::create($src, Consents::CONSENT_STATISTICS));
             } else {
                 $this->tagBag->add(ScriptTag::create($src)->defer()->withSection(TagInterface::SECTION_HEAD));
             }

@@ -9,7 +9,7 @@ use Setono\GoogleAnalyticsMeasurementProtocol\Client\ClientInterface;
 
 final class SendRequestHandler
 {
-    public function __construct(private ClientInterface $client)
+    public function __construct(private readonly ClientInterface $client)
     {
     }
 

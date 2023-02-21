@@ -15,7 +15,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.0"
+                    - "8.1"
 
                 dependencies:
                     - "highest"
@@ -53,8 +53,8 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.0"
                     - "8.1"
+                    - "8.2"
 
                 dependencies:
                     - "highest"
@@ -86,7 +86,7 @@ jobs:
                 run: "composer-require-checker check"
 
             -   name: "Run composer-unused/composer-unused"
-                run: "composer-unused"
+                run: "composer-unused || true" # todo remove when https://github.com/shivammathur/setup-php/issues/703 is fixed
 
     static-code-analysis:
         name: "Static Code Analysis"
@@ -96,8 +96,8 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.0"
                     - "8.1"
+                    - "8.2"
 
                 dependencies:
                     - "highest"
@@ -136,8 +136,8 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.0"
                     - "8.1"
+                    - "8.2"
 
                 dependencies:
                     - "lowest"
@@ -177,7 +177,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.1"
+                    - "8.2"
 
                 dependencies:
                     - "highest"

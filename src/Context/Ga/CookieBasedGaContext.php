@@ -8,17 +8,21 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class CookieBasedGaContext implements GaContextInterface
 {
-    public function __construct(private GaContextInterface $decorated, private RequestStack $requestStack)
+    public function __construct(private readonly RequestStack $requestStack)
     {
     }
 
-    public function getGa(): Ga
+    public function getGa(): ?Ga
     {
         $cookieValue = $this->requestStack->getMainRequest()?->cookies->get('_ga');
         if (!is_string($cookieValue)) {
-            return $this->decorated->getGa();
+            return null;
         }
 
-        return Ga::fromString($cookieValue);
+        try {
+            return Ga::fromString($cookieValue);
+        } catch (\InvalidArgumentException) {
+            return null;
+        }
     }
 }

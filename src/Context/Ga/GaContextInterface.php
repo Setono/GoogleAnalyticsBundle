@@ -6,5 +6,5 @@ namespace Setono\GoogleAnalyticsBundle\Context\Ga;
 
 interface GaContextInterface
 {
-    public function getGa(): Ga;
+    public function getGa(): ?Ga;
 }

@@ -6,14 +6,9 @@ namespace Setono\GoogleAnalyticsBundle\EventSubscriber\Filter;
 
 use Setono\GoogleAnalyticsBundle\Event\FilterEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
-final class FilterEmptyUserAgentSubscriber implements EventSubscriberInterface
+final class FilterNoClientIdSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly RequestStack $requestStack)
-    {
-    }
-
     public static function getSubscribedEvents(): array
     {
         return [
@@ -23,13 +18,7 @@ final class FilterEmptyUserAgentSubscriber implements EventSubscriberInterface
 
     public function filter(FilterEvent $event): void
     {
-        $request = $this->requestStack->getMainRequest();
-        if (null === $request) {
-            return;
-        }
-
-        $userAgent = $request->headers->get('User-Agent');
-        if (!is_string($userAgent) || '' === $userAgent) {
+        if ($event->event->getClientId() === null) {
             $event->stopPropagation();
         }
     }

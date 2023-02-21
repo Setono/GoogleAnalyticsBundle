@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b6517f4fad3f231e7383c54ca6958123",
+    "content-hash": "4950800be51bbc8b7b2a20ee45fff88d",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1039,16 +1039,16 @@
         },
         {
             "name": "doctrine/migrations",
-            "version": "3.5.5",
+            "version": "3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "4b1e2b6ba71d21d0c5be22ed03b6fc954d20b204"
+                "reference": "e542ad8bcd606d7a18d0875babb8a6d963c9c059"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/4b1e2b6ba71d21d0c5be22ed03b6fc954d20b204",
-                "reference": "4b1e2b6ba71d21d0c5be22ed03b6fc954d20b204",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/e542ad8bcd606d7a18d0875babb8a6d963c9c059",
+                "reference": "e542ad8bcd606d7a18d0875babb8a6d963c9c059",
                 "shasum": ""
             },
             "require": {
@@ -1056,11 +1056,11 @@
                 "doctrine/dbal": "^3.5.1",
                 "doctrine/deprecations": "^0.5.3 || ^1",
                 "doctrine/event-manager": "^1.2 || ^2.0",
-                "friendsofphp/proxy-manager-lts": "^1.0",
-                "php": "^7.4 || ^8.0",
+                "php": "^8.1",
                 "psr/log": "^1.1.3 || ^2 || ^3",
                 "symfony/console": "^4.4.16 || ^5.4 || ^6.0",
-                "symfony/stopwatch": "^4.4 || ^5.4 || ^6.0"
+                "symfony/stopwatch": "^4.4 || ^5.4 || ^6.0",
+                "symfony/var-exporter": "^6.2"
             },
             "conflict": {
                 "doctrine/orm": "<2.12"
@@ -1076,7 +1076,7 @@
                 "phpstan/phpstan-phpunit": "^1.1",
                 "phpstan/phpstan-strict-rules": "^1.1",
                 "phpstan/phpstan-symfony": "^1.1",
-                "phpunit/phpunit": "^9.5",
+                "phpunit/phpunit": "^9.5.24",
                 "symfony/cache": "^4.4 || ^5.4 || ^6.0",
                 "symfony/process": "^4.4 || ^5.4 || ^6.0",
                 "symfony/yaml": "^4.4 || ^5.4 || ^6.0"
@@ -1121,7 +1121,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/migrations/issues",
-                "source": "https://github.com/doctrine/migrations/tree/3.5.5"
+                "source": "https://github.com/doctrine/migrations/tree/3.6.0"
             },
             "funding": [
                 {
@@ -1137,7 +1137,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-18T12:44:30+00:00"
+            "time": "2023-02-15T18:49:46+00:00"
         },
         {
             "name": "doctrine/orm",
@@ -1456,151 +1456,6 @@
                 }
             ],
             "time": "2023-01-14T14:17:03+00:00"
-        },
-        {
-            "name": "friendsofphp/proxy-manager-lts",
-            "version": "v1.0.14",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FriendsOfPHP/proxy-manager-lts.git",
-                "reference": "a527c9d9d5348e012bd24482d83a5cd643bcbc9e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/proxy-manager-lts/zipball/a527c9d9d5348e012bd24482d83a5cd643bcbc9e",
-                "reference": "a527c9d9d5348e012bd24482d83a5cd643bcbc9e",
-                "shasum": ""
-            },
-            "require": {
-                "laminas/laminas-code": "~3.4.1|^4.0",
-                "php": ">=7.1",
-                "symfony/filesystem": "^4.4.17|^5.0|^6.0"
-            },
-            "conflict": {
-                "laminas/laminas-stdlib": "<3.2.1",
-                "zendframework/zend-stdlib": "<3.2.1"
-            },
-            "replace": {
-                "ocramius/proxy-manager": "^2.1"
-            },
-            "require-dev": {
-                "ext-phar": "*",
-                "symfony/phpunit-bridge": "^5.4|^6.0"
-            },
-            "type": "library",
-            "extra": {
-                "thanks": {
-                    "name": "ocramius/proxy-manager",
-                    "url": "https://github.com/Ocramius/ProxyManager"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "ProxyManager\\": "src/ProxyManager"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Marco Pivetta",
-                    "email": "ocramius@gmail.com",
-                    "homepage": "https://ocramius.github.io/"
-                },
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                }
-            ],
-            "description": "Adding support for a wider range of PHP versions to ocramius/proxy-manager",
-            "homepage": "https://github.com/FriendsOfPHP/proxy-manager-lts",
-            "keywords": [
-                "aop",
-                "lazy loading",
-                "proxy",
-                "proxy pattern",
-                "service proxies"
-            ],
-            "support": {
-                "issues": "https://github.com/FriendsOfPHP/proxy-manager-lts/issues",
-                "source": "https://github.com/FriendsOfPHP/proxy-manager-lts/tree/v1.0.14"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/Ocramius",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/ocramius/proxy-manager",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2023-01-30T10:40:19+00:00"
-        },
-        {
-            "name": "laminas/laminas-code",
-            "version": "4.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laminas/laminas-code.git",
-                "reference": "dd19fe8e07cc3f374308565667eecd4958c22106"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/dd19fe8e07cc3f374308565667eecd4958c22106",
-                "reference": "dd19fe8e07cc3f374308565667eecd4958c22106",
-                "shasum": ""
-            },
-            "require": {
-                "php": "~8.1.0 || ~8.2.0"
-            },
-            "require-dev": {
-                "doctrine/annotations": "^1.13.3",
-                "ext-phar": "*",
-                "laminas/laminas-coding-standard": "^2.3.0",
-                "laminas/laminas-stdlib": "^3.6.1",
-                "phpunit/phpunit": "^9.5.26",
-                "psalm/plugin-phpunit": "^0.18.0",
-                "vimeo/psalm": "^5.1.0"
-            },
-            "suggest": {
-                "doctrine/annotations": "Doctrine\\Common\\Annotations >=1.0 for annotation features",
-                "laminas/laminas-stdlib": "Laminas\\Stdlib component"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Laminas\\Code\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Extensions to the PHP Reflection API, static code scanning, and code generation",
-            "homepage": "https://laminas.dev",
-            "keywords": [
-                "code",
-                "laminas",
-                "laminasframework"
-            ],
-            "support": {
-                "chat": "https://laminas.dev/chat",
-                "docs": "https://docs.laminas.dev/laminas-code/",
-                "forum": "https://discourse.laminas.dev",
-                "issues": "https://github.com/laminas/laminas-code/issues",
-                "rss": "https://github.com/laminas/laminas-code/releases.atom",
-                "source": "https://github.com/laminas/laminas-code"
-            },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2022-12-08T02:08:23+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2678,76 +2533,84 @@
             "time": "2022-11-14T08:17:48+00:00"
         },
         {
-            "name": "setono/client-id-contracts",
-            "version": "v0.2.0",
+            "name": "setono/consent-bundle",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Setono/client-id-contracts.git",
-                "reference": "afc7a22d8aaf6838c937336f81cc1c3c0c079fdb"
+                "url": "https://github.com/Setono/ConsentBundle.git",
+                "reference": "e842e80db6e1b8a5feb088f97b88b272bef5ea04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Setono/client-id-contracts/zipball/afc7a22d8aaf6838c937336f81cc1c3c0c079fdb",
-                "reference": "afc7a22d8aaf6838c937336f81cc1c3c0c079fdb",
+                "url": "https://api.github.com/repos/Setono/ConsentBundle/zipball/e842e80db6e1b8a5feb088f97b88b272bef5ea04",
+                "reference": "e842e80db6e1b8a5feb088f97b88b272bef5ea04",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.4"
+                "php": ">=7.4",
+                "setono/consent-contracts": "^1.0",
+                "symfony/config": "^5.4 || ^6.0",
+                "symfony/dependency-injection": "^5.4 || ^6.0",
+                "symfony/http-foundation": "^5.4 || ^6.0",
+                "symfony/http-kernel": "^5.4 || ^6.0"
             },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
+            "require-dev": {
+                "infection/infection": "^0.26",
+                "matthiasnoback/symfony-config-test": "^4.3",
+                "matthiasnoback/symfony-dependency-injection-test": "^4.3",
+                "nyholm/symfony-bundle-test": "^2.0",
+                "phpunit/phpunit": "^9.5",
+                "psalm/plugin-phpunit": "^0.18",
+                "psalm/plugin-symfony": "^5.0",
+                "roave/security-advisories": "dev-latest",
+                "setono/code-quality-pack": "^2.4"
             },
+            "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
-                    "Setono\\ClientId\\": "src/"
+                    "Setono\\ConsentBundle\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "description": "Generic abstraction related to client id",
+            "authors": [
+                {
+                    "name": "Joachim Løvgaard",
+                    "email": "joachim@loevgaard.dk"
+                }
+            ],
+            "description": "A Symfony bundle that integrates the consent contracts",
             "support": {
-                "issues": "https://github.com/Setono/client-id-contracts/issues",
-                "source": "https://github.com/Setono/client-id-contracts/tree/v0.2.0"
+                "issues": "https://github.com/Setono/ConsentBundle/issues",
+                "source": "https://github.com/Setono/ConsentBundle/tree/v1.0.0"
             },
-            "time": "2021-04-22T10:04:20+00:00"
+            "time": "2023-02-21T08:42:12+00:00"
         },
         {
             "name": "setono/consent-contracts",
-            "version": "v0.1.3",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Setono/consent-contracts.git",
-                "reference": "f2c9d29d690131504dd2e90e131c656ad9e0cdf1"
+                "reference": "869562acb24ab628d96ab1dd817e5c62125fe64b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Setono/consent-contracts/zipball/f2c9d29d690131504dd2e90e131c656ad9e0cdf1",
-                "reference": "f2c9d29d690131504dd2e90e131c656ad9e0cdf1",
+                "url": "https://api.github.com/repos/Setono/consent-contracts/zipball/869562acb24ab628d96ab1dd817e5c62125fe64b",
+                "reference": "869562acb24ab628d96ab1dd817e5c62125fe64b",
                 "shasum": ""
             },
             "require": {
-                "ext-json": "*",
-                "php": ">=7.4",
-                "setono/client-id-contracts": "^0.2",
-                "webmozart/assert": "^1.10"
+                "php": ">=7.4"
             },
             "require-dev": {
-                "infection/infection": "^0.25.0",
                 "phpunit/phpunit": "^9.5",
-                "psalm/plugin-phpunit": "^0.16.1",
-                "setono/code-quality-pack": "^2.1.3"
+                "psalm/plugin-phpunit": "^0.18",
+                "setono/code-quality-pack": "^2.4"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Setono\\Consent\\": "src/"
@@ -2764,9 +2627,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Setono/consent-contracts/issues",
-                "source": "https://github.com/Setono/consent-contracts/tree/v0.1.3"
+                "source": "https://github.com/Setono/consent-contracts/tree/v1.0.0"
             },
-            "time": "2021-11-22T10:11:25+00:00"
+            "time": "2023-02-21T07:18:32+00:00"
         },
         {
             "name": "setono/google-analytics-bundle",
@@ -2774,7 +2637,7 @@
             "dist": {
                 "type": "path",
                 "url": "../..",
-                "reference": "a4ed1e3c42522ecc8af8d4b42f9626a58714ed6b"
+                "reference": "06c08ddf3d7fd18d799cb696ea49f6fb53351bfe"
             },
             "require": {
                 "php": ">=8.1",
@@ -2786,7 +2649,7 @@
                 "symfony/config": "^5.4 || ^6.0",
                 "symfony/dependency-injection": "^5.4 || ^6.0",
                 "symfony/event-dispatcher": "^5.4 || ^6.0",
-                "symfony/event-dispatcher-contracts": "^3.0",
+                "symfony/event-dispatcher-contracts": "^3.2",
                 "symfony/http-foundation": "^5.4 || ^6.0",
                 "symfony/http-kernel": "^5.4 || ^6.0",
                 "symfony/messenger": "^5.4 || ^6.0",
@@ -2803,7 +2666,7 @@
                 "psalm/plugin-symfony": "^5.0",
                 "roave/security-advisories": "dev-latest",
                 "setono/code-quality-pack": "^2.4",
-                "setono/consent-contracts": "^0.1.3"
+                "setono/consent-bundle": "^1.0"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -2853,18 +2716,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Setono/google-analytics-measurement-protocol.git",
-                "reference": "3df9802b217a010d0ff6a593f05c6293897f14f6"
+                "reference": "1c1d7510cfecea0d86bdd2beab1db3ad7de59a9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Setono/google-analytics-measurement-protocol/zipball/3df9802b217a010d0ff6a593f05c6293897f14f6",
-                "reference": "3df9802b217a010d0ff6a593f05c6293897f14f6",
+                "url": "https://api.github.com/repos/Setono/google-analytics-measurement-protocol/zipball/1c1d7510cfecea0d86bdd2beab1db3ad7de59a9d",
+                "reference": "1c1d7510cfecea0d86bdd2beab1db3ad7de59a9d",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": ">=8.0",
-                "php-http/discovery": "^1.14",
+                "php": ">=8.1",
+                "php-http/discovery": "^1.15",
                 "psr/http-client": "^1.0",
                 "psr/http-client-implementation": "^1",
                 "psr/http-factory": "^1.0",
@@ -2880,7 +2743,7 @@
                 "phpspec/prophecy-phpunit": "^2.0",
                 "phpunit/phpunit": "^9.5",
                 "psalm/plugin-phpunit": "^0.18",
-                "setono/code-quality-pack": "^2.2"
+                "setono/code-quality-pack": "^2.4"
             },
             "default-branch": true,
             "type": "library",
@@ -2909,7 +2772,7 @@
                 "issues": "https://github.com/Setono/google-analytics-measurement-protocol/issues",
                 "source": "https://github.com/Setono/google-analytics-measurement-protocol/tree/1.x"
             },
-            "time": "2022-12-06T12:14:47+00:00"
+            "time": "2023-02-21T11:55:16+00:00"
         },
         {
             "name": "setono/symfony-main-request-trait",
@@ -4336,16 +4199,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v2.2.4",
+            "version": "v2.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "52baff1adb29faf443c6710cb775bd88b9627381"
+                "reference": "2ff8465e7172790a47ab3c129f2b514eb2d8a286"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/52baff1adb29faf443c6710cb775bd88b9627381",
-                "reference": "52baff1adb29faf443c6710cb775bd88b9627381",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/2ff8465e7172790a47ab3c129f2b514eb2d8a286",
+                "reference": "2ff8465e7172790a47ab3c129f2b514eb2d8a286",
                 "shasum": ""
             },
             "require": {
@@ -4381,7 +4244,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v2.2.4"
+                "source": "https://github.com/symfony/flex/tree/v2.2.5"
             },
             "funding": [
                 {
@@ -4397,7 +4260,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-20T07:19:39+00:00"
+            "time": "2023-02-18T08:03:15+00:00"
         },
         {
             "name": "symfony/form",

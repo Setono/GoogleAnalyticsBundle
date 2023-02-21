@@ -6,12 +6,21 @@ namespace Setono\GoogleAnalyticsBundle\Stack;
 
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\Event;
 
-interface EventStackInterface extends \Countable, \Traversable
+interface EventStackInterface
 {
     /**
+     * Returns all client events and removes them from the stack
+     *
      * @return list<Event>
      */
-    public function all(): array;
+    public function popClientSide(): array;
+
+    /**
+     * Returns all server side events and removes them from the stack
+     *
+     * @return list<Event>
+     */
+    public function popServerSide(): array;
 
     public function push(Event $event): void;
 

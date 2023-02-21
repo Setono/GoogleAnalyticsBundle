@@ -12,14 +12,10 @@ use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\Event;
 
 final class EventHandler
 {
-    private EventDispatcherInterface $eventDispatcher;
-
-    private EventStackInterface $eventStack;
-
-    public function __construct(EventDispatcherInterface $eventDispatcher, EventStackInterface $eventStack)
-    {
-        $this->eventDispatcher = $eventDispatcher;
-        $this->eventStack = $eventStack;
+    public function __construct(
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly EventStackInterface $eventStack,
+    ) {
     }
 
     public function __invoke(Event $event): void

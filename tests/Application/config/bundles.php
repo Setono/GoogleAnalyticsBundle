@@ -17,4 +17,5 @@ return [
     Setono\BotDetectionBundle\SetonoBotDetectionBundle::class => ['all' => true],
     Setono\GoogleAnalyticsBundle\SetonoGoogleAnalyticsBundle::class => ['all' => true],
     Setono\TagBagBundle\SetonoTagBagBundle::class => ['all' => true],
+    Setono\ConsentBundle\SetonoConsentBundle::class => ['all' => true],
 ];
