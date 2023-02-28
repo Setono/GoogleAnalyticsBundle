@@ -2393,20 +2393,20 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v6.2.9",
+            "version": "v6.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "dcfac94d6bdcf95c126e8ccac2104917c7c8f135"
+                "reference": "2f886f4b31f23c76496901acaedfedb6936ba61f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/dcfac94d6bdcf95c126e8ccac2104917c7c8f135",
-                "reference": "dcfac94d6bdcf95c126e8ccac2104917c7c8f135",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/2f886f4b31f23c76496901acaedfedb6936ba61f",
+                "reference": "2f886f4b31f23c76496901acaedfedb6936ba61f",
                 "shasum": ""
             },
             "require": {
-                "doctrine/annotations": "^1.0",
+                "doctrine/annotations": "^1.0|^2.0",
                 "php": ">=7.2.5",
                 "symfony/config": "^4.4|^5.0|^6.0",
                 "symfony/dependency-injection": "^4.4|^5.0|^6.0",
@@ -2464,11 +2464,10 @@
                 "controllers"
             ],
             "support": {
-                "issues": "https://github.com/sensiolabs/SensioFrameworkExtraBundle/issues",
-                "source": "https://github.com/sensiolabs/SensioFrameworkExtraBundle/tree/v6.2.9"
+                "source": "https://github.com/sensiolabs/SensioFrameworkExtraBundle/tree/v6.2.10"
             },
             "abandoned": "Symfony",
-            "time": "2022-11-01T17:17:13+00:00"
+            "time": "2023-02-24T14:57:12+00:00"
         },
         {
             "name": "setono/bot-detection-bundle",
@@ -2637,14 +2636,15 @@
             "dist": {
                 "type": "path",
                 "url": "../..",
-                "reference": "06c08ddf3d7fd18d799cb696ea49f6fb53351bfe"
+                "reference": "4b227ba18c01102b87f1c0301d3e901b37cbbaff"
             },
             "require": {
                 "php": ">=8.1",
                 "psr/event-dispatcher": "^1.0",
+                "psr/log": "^3.0",
                 "setono/bot-detection-bundle": "^1.9",
                 "setono/google-analytics-measurement-protocol": "1.x-dev",
-                "setono/tag-bag": "^2.1",
+                "setono/tag-bag": "^2.2",
                 "setono/tag-bag-bundle": "^3.0",
                 "symfony/config": "^5.4 || ^6.0",
                 "symfony/dependency-injection": "^5.4 || ^6.0",
@@ -2716,12 +2716,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Setono/google-analytics-measurement-protocol.git",
-                "reference": "1c1d7510cfecea0d86bdd2beab1db3ad7de59a9d"
+                "reference": "565854178783c005efa50a1f3c4fa6a25397e7c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Setono/google-analytics-measurement-protocol/zipball/1c1d7510cfecea0d86bdd2beab1db3ad7de59a9d",
-                "reference": "1c1d7510cfecea0d86bdd2beab1db3ad7de59a9d",
+                "url": "https://api.github.com/repos/Setono/google-analytics-measurement-protocol/zipball/565854178783c005efa50a1f3c4fa6a25397e7c1",
+                "reference": "565854178783c005efa50a1f3c4fa6a25397e7c1",
                 "shasum": ""
             },
             "require": {
@@ -2772,7 +2772,7 @@
                 "issues": "https://github.com/Setono/google-analytics-measurement-protocol/issues",
                 "source": "https://github.com/Setono/google-analytics-measurement-protocol/tree/1.x"
             },
-            "time": "2023-02-21T11:55:16+00:00"
+            "time": "2023-02-28T12:28:06+00:00"
         },
         {
             "name": "setono/symfony-main-request-trait",
@@ -2832,16 +2832,16 @@
         },
         {
             "name": "setono/tag-bag",
-            "version": "v2.1.0",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Setono/tag-bag.git",
-                "reference": "36c120f6a706d565d2db4f909e29a8d31e581326"
+                "reference": "2ce7186402124160eb3212c6c391b42453ae46ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Setono/tag-bag/zipball/36c120f6a706d565d2db4f909e29a8d31e581326",
-                "reference": "36c120f6a706d565d2db4f909e29a8d31e581326",
+                "url": "https://api.github.com/repos/Setono/tag-bag/zipball/2ce7186402124160eb3212c6c391b42453ae46ae",
+                "reference": "2ce7186402124160eb3212c6c391b42453ae46ae",
                 "shasum": ""
             },
             "require": {
@@ -2876,9 +2876,9 @@
             "description": "Inject dynamic tags programmatically",
             "support": {
                 "issues": "https://github.com/Setono/tag-bag/issues",
-                "source": "https://github.com/Setono/tag-bag/tree/v2.1.0"
+                "source": "https://github.com/Setono/tag-bag/tree/v2.2.0"
             },
-            "time": "2023-02-14T13:11:55+00:00"
+            "time": "2023-02-28T11:51:47+00:00"
         },
         {
             "name": "setono/tag-bag-bundle",
@@ -8408,23 +8408,23 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.2.24",
+            "version": "9.2.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "2cf940ebc6355a9d430462811b5aaa308b174bed"
+                "reference": "0e2b40518197a8c0d4b08bc34dfff1c99c508954"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/2cf940ebc6355a9d430462811b5aaa308b174bed",
-                "reference": "2cf940ebc6355a9d430462811b5aaa308b174bed",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/0e2b40518197a8c0d4b08bc34dfff1c99c508954",
+                "reference": "0e2b40518197a8c0d4b08bc34dfff1c99c508954",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-libxml": "*",
                 "ext-xmlwriter": "*",
-                "nikic/php-parser": "^4.14",
+                "nikic/php-parser": "^4.15",
                 "php": ">=7.3",
                 "phpunit/php-file-iterator": "^3.0.3",
                 "phpunit/php-text-template": "^2.0.2",
@@ -8473,7 +8473,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.24"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.25"
             },
             "funding": [
                 {
@@ -8481,7 +8481,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-26T08:26:55+00:00"
+            "time": "2023-02-25T05:32:00+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -8726,16 +8726,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.6.3",
+            "version": "9.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "e7b1615e3e887d6c719121c6d4a44b0ab9645555"
+                "reference": "9125ee085b6d95e78277dc07aa1f46f9e0607b8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e7b1615e3e887d6c719121c6d4a44b0ab9645555",
-                "reference": "e7b1615e3e887d6c719121c6d4a44b0ab9645555",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9125ee085b6d95e78277dc07aa1f46f9e0607b8d",
+                "reference": "9125ee085b6d95e78277dc07aa1f46f9e0607b8d",
                 "shasum": ""
             },
             "require": {
@@ -8808,7 +8808,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.3"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.4"
             },
             "funding": [
                 {
@@ -8824,7 +8824,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-04T13:37:15+00:00"
+            "time": "2023-02-27T13:06:37+00:00"
         },
         {
             "name": "sebastian/cli-parser",

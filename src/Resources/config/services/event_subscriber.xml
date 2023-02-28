@@ -7,6 +7,17 @@
                  class="Setono\GoogleAnalyticsBundle\EventSubscriber\Tag\LibrarySubscriber">
             <argument type="service" id="setono_tag_bag.tag_bag"/>
             <argument type="service" id="setono_google_analytics.property_provider.default"/>
+            <argument type="service" id="setono_consent.consent_checker.default" on-invalid="null"/>
+            <argument>%setono_google_analytics.consent_enabled%</argument>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="setono_google_analytics.event_subscriber.tag.event"
+                 class="Setono\GoogleAnalyticsBundle\EventSubscriber\Tag\EventSubscriber">
+            <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <argument type="service" id="setono_google_analytics.stack.event"/>
+            <argument type="service" id="setono_consent.consent_checker.default" on-invalid="null"/>
             <argument>%setono_google_analytics.consent_enabled%</argument>
 
             <tag name="kernel.event_subscriber"/>
