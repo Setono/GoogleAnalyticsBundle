@@ -7,12 +7,9 @@ namespace Setono\GoogleAnalyticsBundle\EventSubscriber\Tag;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Setono\Consent\ConsentCheckerInterface;
-use Setono\Consent\Consents;
 use Setono\GoogleAnalyticsBundle\Event\ClientSideEvent;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\Event;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Request;
-use Setono\TagBag\Tag\ConsentableInlineScriptTag;
 use Setono\TagBag\Tag\InlineScriptTag;
 use Setono\TagBag\Tag\TagInterface;
 use Setono\TagBag\TagBagInterface;
@@ -22,11 +19,8 @@ final class EventSubscriber implements EventSubscriberInterface, LoggerAwareInte
 {
     private LoggerInterface $logger;
 
-    public function __construct(
-        private readonly TagBagInterface $tagBag,
-        private readonly ?ConsentCheckerInterface $consentChecker,
-        private readonly bool $consentEnabled,
-    ) {
+    public function __construct(private readonly TagBagInterface $tagBag)
+    {
         $this->logger = new NullLogger();
     }
 
@@ -39,11 +33,11 @@ final class EventSubscriber implements EventSubscriberInterface, LoggerAwareInte
 
     public function add(ClientSideEvent $clientSideEvent): void
     {
-        if ($this->consentEnabled && null !== $this->consentChecker && !$this->consentChecker->isGranted(Consents::CONSENT_STATISTICS)) {
-            $this->tagBag->add(ConsentableInlineScriptTag::create($this->generateGtag($clientSideEvent->event), Consents::CONSENT_STATISTICS));
-        } else {
-            $this->tagBag->add(InlineScriptTag::create($this->generateGtag($clientSideEvent->event))->withSection(TagInterface::SECTION_HEAD));
-        }
+        $this->tagBag->add(InlineScriptTag::create(
+            $this->generateGtag($clientSideEvent->event),
+        )->withSection(
+            TagInterface::SECTION_HEAD,
+        ));
     }
 
     private function generateGtag(Event $event): string

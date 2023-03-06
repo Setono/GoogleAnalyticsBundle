@@ -26,6 +26,12 @@ final class SetonoGoogleAnalyticsExtension extends Extension implements PrependE
         $container->setParameter('setono_google_analytics.consent_enabled', $config['consent']['enabled']);
 
         $loader->load('services.xml');
+
+        if (true === $config['consent']['enabled']) {
+            $loader->load('services/conditional/consent_enabled.xml');
+        } else {
+            $loader->load('services/conditional/consent_disabled.xml');
+        }
     }
 
     public function prepend(ContainerBuilder $container): void
