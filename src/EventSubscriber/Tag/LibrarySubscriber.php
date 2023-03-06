@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsBundle\EventSubscriber\Tag;
 
-use Setono\Consent\ConsentCheckerInterface;
 use Setono\Consent\Consents;
+use Setono\GoogleAnalyticsBundle\ConsentChecker\ConsentCheckerInterface;
 use Setono\GoogleAnalyticsBundle\Provider\PropertyProviderInterface;
 use Setono\TagBag\Tag\ConsentableScriptTag;
 use Setono\TagBag\Tag\InlineScriptTag;
@@ -21,8 +21,7 @@ final class LibrarySubscriber implements EventSubscriberInterface
     public function __construct(
         private readonly TagBagInterface $tagBag,
         private readonly PropertyProviderInterface $propertyProvider,
-        private readonly ?ConsentCheckerInterface $consentChecker,
-        private readonly bool $consentEnabled,
+        private readonly ConsentCheckerInterface $consentChecker,
     ) {
     }
 
@@ -53,10 +52,10 @@ final class LibrarySubscriber implements EventSubscriberInterface
 
             $src = sprintf('https://www.googletagmanager.com/gtag/js?id=%s', $properties[0]->measurementId);
 
-            if ($this->consentEnabled && null !== $this->consentChecker && !$this->consentChecker->isGranted(Consents::CONSENT_STATISTICS)) {
-                $this->tagBag->add(ConsentableScriptTag::create($src, Consents::CONSENT_STATISTICS));
-            } else {
+            if ($this->consentChecker->isGranted(Consents::CONSENT_STATISTICS)) {
                 $this->tagBag->add(ScriptTag::create($src)->defer()->withSection(TagInterface::SECTION_HEAD)->withPriority(100));
+            } else {
+                $this->tagBag->add(ConsentableScriptTag::create($src, Consents::CONSENT_STATISTICS));
             }
         } else {
             $this->tagBag->add(InlineScriptTag::create('console.error("[Setono Google Analytics Bundle] You have not configured any Google Analytics properties.")'));

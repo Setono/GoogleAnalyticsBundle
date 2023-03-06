@@ -16,6 +16,7 @@
         "true",
         "void",
         "Setono\\Consent\\Consents",
-        "Setono\\ConsentBundle\\SetonoConsentBundle"
+        "Setono\\ConsentBundle\\SetonoConsentBundle",
+        "Setono\\Consent\\ConsentCheckerInterface"
     ]
 }
