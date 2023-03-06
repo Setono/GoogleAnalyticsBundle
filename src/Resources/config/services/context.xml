@@ -3,15 +3,14 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <!-- Ga context -->
-        <service id="Setono\GoogleAnalyticsBundle\Context\Ga\GaContextInterface"
-                 alias="setono_google_analytics.context.ga"/>
+        <service id="Setono\GoogleAnalyticsBundle\Context\ClientIdContextInterface"
+                 alias="setono_google_analytics.context.client_id"/>
 
-        <service id="setono_google_analytics.context.ga"
-                 alias="setono_google_analytics.context.ga.cookie_based"/>
+        <service id="setono_google_analytics.context.client_id"
+                 alias="setono_google_analytics.context.client_id.cookie_based"/>
 
-        <service id="setono_google_analytics.context.ga.cookie_based"
-                 class="Setono\GoogleAnalyticsBundle\Context\Ga\CookieBasedGaContext">
+        <service id="setono_google_analytics.context.client_id.cookie_based"
+                 class="Setono\GoogleAnalyticsBundle\Context\GaBasedClientIdContext">
             <argument type="service" id="request_stack"/>
         </service>
     </services>

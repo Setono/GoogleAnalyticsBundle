@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsBundle\DependencyInjection;
 
-use Setono\Consent\Consent;
+use Setono\ConsentBundle\SetonoConsentBundle;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -28,7 +28,7 @@ final class Configuration implements ConfigurationInterface
 
         $consentNode = $rootNode->children()->arrayNode('consent');
 
-        if (class_exists(Consent::class)) {
+        if (class_exists(SetonoConsentBundle::class)) {
             $consentNode->canBeDisabled();
         } else {
             $consentNode->canBeEnabled();

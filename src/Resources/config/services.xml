@@ -6,9 +6,7 @@
         <import resource="services/client.xml"/>
         <import resource="services/context.xml"/>
         <import resource="services/event_subscriber.xml"/>
-        <import resource="services/factory.xml"/>
         <import resource="services/message.xml"/>
         <import resource="services/provider.xml"/>
-        <import resource="services/stack.xml"/>
     </imports>
 </container>
