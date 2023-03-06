@@ -16,47 +16,30 @@
         <service id="setono_google_analytics.event_subscriber.tag.event"
                  class="Setono\GoogleAnalyticsBundle\EventSubscriber\Tag\EventSubscriber">
             <argument type="service" id="setono_tag_bag.tag_bag"/>
-            <argument type="service" id="setono_google_analytics.stack.event"/>
             <argument type="service" id="setono_consent.consent_checker.default" on-invalid="null"/>
             <argument>%setono_google_analytics.consent_enabled%</argument>
+            <call method="setLogger">
+                <argument type="service" id="logger"/>
+            </call>
 
             <tag name="kernel.event_subscriber"/>
         </service>
 
-        <service id="setono_google_analytics.event_subscriber.dispatch_requests"
-                 class="Setono\GoogleAnalyticsBundle\EventSubscriber\DispatchRequestsSubscriber">
+        <service id="setono_google_analytics.event_subscriber.populate_client_id"
+                 class="Setono\GoogleAnalyticsBundle\EventSubscriber\PopulateClientIdSubscriber">
+            <argument type="service" id="setono_google_analytics.context.client_id"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="setono_google_analytics.event_subscriber.handle_server_side_event"
+                 class="Setono\GoogleAnalyticsBundle\EventSubscriber\HandleServerSideEventSubscriber">
             <argument type="service" id="setono_google_analytics.command_bus"/>
-            <argument type="service" id="setono_google_analytics.stack.event"/>
             <argument type="service" id="setono_google_analytics.property_provider.default"/>
-            <argument type="service" id="setono_google_analytics.factory.request"/>
+            <call method="setLogger">
+                <argument type="service" id="logger"/>
+            </call>
 
-            <tag name="kernel.event_subscriber"/>
-        </service>
-
-        <!-- Filters -->
-        <service id="setono_google_analytics.event_subscriber.filter.bots"
-                 class="Setono\GoogleAnalyticsBundle\EventSubscriber\Filter\FilterBotsSubscriber">
-            <argument type="service" id="setono_bot_detection.bot_detector.default"/>
-
-            <tag name="kernel.event_subscriber"/>
-        </service>
-
-        <service id="setono_google_analytics.event_subscriber.filter.empty_user_agent"
-                 class="Setono\GoogleAnalyticsBundle\EventSubscriber\Filter\FilterEmptyUserAgentSubscriber">
-            <argument type="service" id="request_stack"/>
-
-            <tag name="kernel.event_subscriber"/>
-        </service>
-
-        <service id="setono_google_analytics.event_subscriber.filter.no_client_id"
-                 class="Setono\GoogleAnalyticsBundle\EventSubscriber\Filter\FilterNoClientIdSubscriber">
-            <tag name="kernel.event_subscriber"/>
-        </service>
-
-        <!-- Populaters -->
-        <service id="setono_google_analytics.event_subscriber.populate.client_id"
-                 class="Setono\GoogleAnalyticsBundle\EventSubscriber\Populate\PopulateClientIdSubscriber">
-            <argument type="service" id="setono_google_analytics.context.ga"/>
             <tag name="kernel.event_subscriber"/>
         </service>
     </services>

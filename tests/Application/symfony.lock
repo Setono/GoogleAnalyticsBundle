@@ -73,9 +73,6 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
-    "setono/bot-detection-bundle": {
-        "version": "v1.9.0"
-    },
     "setono/consent-bundle": {
         "version": "v1.0.0"
     },
