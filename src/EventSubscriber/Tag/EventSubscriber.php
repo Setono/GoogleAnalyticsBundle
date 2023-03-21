@@ -43,7 +43,7 @@ final class EventSubscriber implements EventSubscriberInterface, LoggerAwareInte
     private function generateGtag(Event $event): string
     {
         try {
-            $json = json_encode($event->getPayload(Request::TRACKING_CONTEXT_CLIENT_SIDE), \JSON_THROW_ON_ERROR | \JSON_FORCE_OBJECT);
+            $json = json_encode($event->getPayload(Request::TRACKING_CONTEXT_CLIENT_SIDE), \JSON_THROW_ON_ERROR);
         } catch (\JsonException $e) {
             $this->logger->error(sprintf('Could not json encode the event %s. The JSON error was: %s', $event->getEventName(), $e->getMessage()));
 
