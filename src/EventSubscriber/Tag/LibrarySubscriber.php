@@ -46,9 +46,14 @@ final class LibrarySubscriber implements EventSubscriberInterface
 
         $properties = $this->propertyProvider->getProperties();
         if (count($properties) > 0) {
-            $this->tagBag->add(InlineScriptTag::create(sprintf('gtag("config", "%s");', $properties[0]->measurementId))
-                ->withSection(TagInterface::SECTION_HEAD)->withPriority(80))
-            ;
+            foreach ($properties as $property) {
+                $this->tagBag->add(InlineScriptTag::create(sprintf(
+                    'gtag("config", "%s");',
+                    $property->measurementId,
+                ))->withSection(TagInterface::SECTION_HEAD)
+                    ->withPriority(80))
+                ;
+            }
 
             $src = sprintf('https://www.googletagmanager.com/gtag/js?id=%s', $properties[0]->measurementId);
 
