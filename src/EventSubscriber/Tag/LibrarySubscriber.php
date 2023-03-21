@@ -52,13 +52,18 @@ final class LibrarySubscriber implements EventSubscriberInterface
 
             $src = sprintf('https://www.googletagmanager.com/gtag/js?id=%s', $properties[0]->measurementId);
 
-            if ($this->consentChecker->isGranted(Consents::CONSENT_STATISTICS)) {
+            if ($this->consentChecker->isGranted(self::getConsentType())) {
                 $this->tagBag->add(ScriptTag::create($src)->defer()->withSection(TagInterface::SECTION_HEAD)->withPriority(100));
             } else {
-                $this->tagBag->add(ConsentableScriptTag::create($src, Consents::CONSENT_STATISTICS));
+                $this->tagBag->add(ConsentableScriptTag::create($src, self::getConsentType()));
             }
         } else {
             $this->tagBag->add(InlineScriptTag::create('console.error("[Setono Google Analytics Bundle] You have not configured any Google Analytics properties.")'));
         }
+    }
+
+    private static function getConsentType(): string
+    {
+        return class_exists(Consents::class) ? Consents::CONSENT_STATISTICS : 'statistics';
     }
 }
