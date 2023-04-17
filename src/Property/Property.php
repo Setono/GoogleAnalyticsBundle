@@ -12,6 +12,9 @@ final class Property
         public readonly string $apiSecret,
         public readonly string $measurementId,
     ) {
-        Assert::true(str_starts_with($measurementId, 'G-'));
+        Assert::true(
+            str_starts_with($measurementId, 'G-'),
+            sprintf('The measurement id does not start with "G-". The given input was: "%s"', $measurementId),
+        );
     }
 }
