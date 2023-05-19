@@ -12,12 +12,16 @@ use Symfony\Contracts\EventDispatcher\Event as StoppableEvent;
  */
 final class ServerSideEvent extends StoppableEvent
 {
-    public function __construct(
-        public readonly Event $event,
-        /**
-         * If you do not provide a client id, the client id from the _ga cookie will be used
-         */
-        public ?string $clientId = null,
-    ) {
+    public Event $event;
+
+    public ?string $clientId = null;
+
+    /**
+     * @param string|null $clientId If you do not provide a client id, the client id from the _ga cookie will be used
+     */
+    public function __construct(Event $event, string $clientId = null)
+    {
+        $this->event = $event;
+        $this->clientId = $clientId;
     }
 }

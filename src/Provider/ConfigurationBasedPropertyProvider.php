@@ -9,7 +9,7 @@ use Setono\GoogleAnalyticsBundle\Property\Property;
 final class ConfigurationBasedPropertyProvider implements PropertyProviderInterface
 {
     /** @var list<array{api_secret: string, measurement_id: string}> */
-    private readonly array $properties;
+    private array $properties;
 
     /**
      * @param list<array{api_secret: string, measurement_id: string}> $properties

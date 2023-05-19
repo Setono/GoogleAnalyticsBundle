@@ -10,8 +10,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 final class PopulateClientIdSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly ClientIdContextInterface $clientIdContext)
+    private ClientIdContextInterface $clientIdContext;
+
+    public function __construct(ClientIdContextInterface $clientIdContext)
     {
+        $this->clientIdContext = $clientIdContext;
     }
 
     public static function getSubscribedEvents(): array

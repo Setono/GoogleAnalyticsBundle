@@ -18,11 +18,20 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class LibrarySubscriber implements EventSubscriberInterface
 {
+    private TagBagInterface $tagBag;
+
+    private PropertyProviderInterface $propertyProvider;
+
+    private ConsentCheckerInterface $consentChecker;
+
     public function __construct(
-        private readonly TagBagInterface $tagBag,
-        private readonly PropertyProviderInterface $propertyProvider,
-        private readonly ConsentCheckerInterface $consentChecker,
+        TagBagInterface $tagBag,
+        PropertyProviderInterface $propertyProvider,
+        ConsentCheckerInterface $consentChecker
     ) {
+        $this->tagBag = $tagBag;
+        $this->propertyProvider = $propertyProvider;
+        $this->consentChecker = $consentChecker;
     }
 
     public static function getSubscribedEvents(): array

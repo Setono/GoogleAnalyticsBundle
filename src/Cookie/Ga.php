@@ -6,8 +6,11 @@ namespace Setono\GoogleAnalyticsBundle\Cookie;
 
 final class Ga
 {
-    private function __construct(public readonly string $clientId)
+    public string $clientId;
+
+    private function __construct(string $clientId)
     {
+        $this->clientId = $clientId;
     }
 
     /**
