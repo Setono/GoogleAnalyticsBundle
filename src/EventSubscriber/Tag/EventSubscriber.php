@@ -19,9 +19,12 @@ final class EventSubscriber implements EventSubscriberInterface, LoggerAwareInte
 {
     private LoggerInterface $logger;
 
-    public function __construct(private readonly TagBagInterface $tagBag)
+    private TagBagInterface $tagBag;
+
+    public function __construct(TagBagInterface $tagBag)
     {
         $this->logger = new NullLogger();
+        $this->tagBag = $tagBag;
     }
 
     public static function getSubscribedEvents(): array

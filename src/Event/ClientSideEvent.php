@@ -12,7 +12,10 @@ use Symfony\Contracts\EventDispatcher\Event as StoppableEvent;
  */
 final class ClientSideEvent extends StoppableEvent
 {
-    public function __construct(public readonly Event $event)
+    public Event $event;
+
+    public function __construct(Event $event)
     {
+        $this->event = $event;
     }
 }

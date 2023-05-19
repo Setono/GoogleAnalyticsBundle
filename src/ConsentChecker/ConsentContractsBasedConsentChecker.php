@@ -11,7 +11,7 @@ use Setono\Consent\ConsentCheckerInterface as BaseConsentCheckerInterface;
  */
 final class ConsentContractsBasedConsentChecker implements ConsentCheckerInterface
 {
-    private readonly BaseConsentCheckerInterface $consentChecker;
+    private BaseConsentCheckerInterface $consentChecker;
 
     public function __construct(?BaseConsentCheckerInterface $consentChecker)
     {

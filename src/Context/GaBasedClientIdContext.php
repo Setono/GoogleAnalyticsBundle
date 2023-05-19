@@ -9,13 +9,21 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class GaBasedClientIdContext implements ClientIdContextInterface
 {
-    public function __construct(private readonly RequestStack $requestStack)
+    private RequestStack $requestStack;
+
+    public function __construct(RequestStack $requestStack)
     {
+        $this->requestStack = $requestStack;
     }
 
     public function getClientId(): ?string
     {
-        $cookieValue = $this->requestStack->getMainRequest()?->cookies->get('_ga');
+        $request = $this->requestStack->getMainRequest();
+        if (null === $request) {
+            return null;
+        }
+
+        $cookieValue = $request->cookies->get('_ga');
         if (!is_string($cookieValue)) {
             return null;
         }

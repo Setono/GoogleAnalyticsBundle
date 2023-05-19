@@ -22,11 +22,15 @@ final class HandleServerSideEventSubscriber implements EventSubscriberInterface,
 {
     private LoggerInterface $logger;
 
-    public function __construct(
-        private readonly MessageBusInterface $commandBus,
-        private readonly PropertyProviderInterface $propertyProvider,
-    ) {
+    private MessageBusInterface $commandBus;
+
+    private PropertyProviderInterface $propertyProvider;
+
+    public function __construct(MessageBusInterface $commandBus, PropertyProviderInterface $propertyProvider)
+    {
         $this->logger = new NullLogger();
+        $this->commandBus = $commandBus;
+        $this->propertyProvider = $propertyProvider;
     }
 
     public static function getSubscribedEvents(): array

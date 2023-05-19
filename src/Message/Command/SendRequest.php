@@ -8,7 +8,10 @@ use Setono\GoogleAnalyticsMeasurementProtocol\Request\Request;
 
 final class SendRequest implements CommandInterface
 {
-    public function __construct(public readonly Request $request)
+    public Request $request;
+
+    public function __construct(Request $request)
     {
+        $this->request = $request;
     }
 }
