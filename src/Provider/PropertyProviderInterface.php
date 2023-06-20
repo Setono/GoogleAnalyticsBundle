@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsBundle\Provider;
 
-use Setono\GoogleAnalyticsBundle\Property\Property;
+use Setono\GoogleAnalyticsBundle\ValueObject\Property;
 
 interface PropertyProviderInterface
 {

@@ -28,6 +28,10 @@ final class GaBasedClientIdContext implements ClientIdContextInterface
             return null;
         }
 
-        return Ga::fromString($cookieValue)->clientId;
+        try {
+            return Ga::fromString($cookieValue)->clientId;
+        } catch (\InvalidArgumentException $e) {
+            return null;
+        }
     }
 }
