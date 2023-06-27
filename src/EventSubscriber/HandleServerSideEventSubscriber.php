@@ -51,6 +51,14 @@ final class HandleServerSideEventSubscriber implements EventSubscriberInterface,
         $properties = $this->propertyProvider->getProperties();
 
         foreach ($properties as $property) {
+            if (null === $property->apiSecret) {
+                $this->logger->error(sprintf(
+                    'You tried to send an event server side, but the API secret is not set on the property with measurement id %s',
+                    $property->measurementId
+                ));
+
+                continue;
+            }
             $request = new Request($property->apiSecret, $property->measurementId, Body::create($serverSideEvent->clientId)->addEvent($serverSideEvent->event));
             $this->commandBus->dispatch(new SendRequest($request));
         }

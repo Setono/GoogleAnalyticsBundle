@@ -25,14 +25,16 @@ final class SetonoGoogleAnalyticsExtensionTest extends AbstractExtensionTestCase
     public function it_has_parameters_set(): void
     {
         $this->load([
-            'properties' => [
-                [
-                    'api_secret' => 'secret1',
-                    'measurement_id' => 'measurement_id1',
-                ],
-                [
-                    'api_secret' => 'secret2',
-                    'measurement_id' => 'measurement_id2',
+            'gtag' => [
+                'properties' => [
+                    [
+                        'api_secret' => 'secret1',
+                        'measurement_id' => 'measurement_id1',
+                    ],
+                    [
+                        'api_secret' => 'secret2',
+                        'measurement_id' => 'measurement_id2',
+                    ],
                 ],
             ],
         ]);

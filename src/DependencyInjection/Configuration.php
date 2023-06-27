@@ -15,15 +15,38 @@ final class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder('setono_google_analytics');
         $rootNode = $treeBuilder->getRootNode();
 
-        /** @psalm-suppress MixedMethodCall, PossiblyUndefinedMethod, PossiblyNullReference,UndefinedInterfaceMethod */
+        /** @psalm-suppress MixedMethodCall, PossiblyNullReference,UndefinedInterfaceMethod */
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-                ->arrayNode('properties')
-                    ->arrayPrototype()
-                        ->children()
-                            ->scalarNode('api_secret')->isRequired()->cannotBeEmpty()->end()
-                            ->scalarNode('measurement_id')->isRequired()->cannotBeEmpty()->end()
+                ->booleanNode('inject_library')
+                    ->defaultTrue()
+                    ->info('If this is set to true, the bundle will inject the library for the corresponding collection strategy, e.g. if you have enabled "tag_manager", it will inject the https://www.googletagmanager.com/gtm.js library')
+                ->end()
+                ->arrayNode('gtag')
+                    ->canBeEnabled()
+                    ->children()
+                        ->arrayNode('properties')
+                            ->arrayPrototype()
+                                ->children()
+                                    ->scalarNode('measurement_id')->isRequired()->cannotBeEmpty()->end()
+                                    ->scalarNode('api_secret')->defaultNull()->cannotBeEmpty()->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('tag_manager')
+                    ->canBeEnabled()
+                    ->children()
+                        ->arrayNode('containers')
+                            ->info('Notice that adding more than one container is possible, but not recommended as per Googles best practices')
+                            ->arrayPrototype()
+                                ->children()
+                                    ->scalarNode('id')
+                                        ->info('The container id. Looks something like: GTM-WMF5KF')
+                                        ->isRequired()
+                                        ->cannotBeEmpty()
         ;
 
         $consentNode = $rootNode->children()->arrayNode('consent');

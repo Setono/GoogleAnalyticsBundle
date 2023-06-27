@@ -2,24 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Setono\GoogleAnalyticsBundle\Property;
+namespace Setono\GoogleAnalyticsBundle\ValueObject;
 
 use Webmozart\Assert\Assert;
 
+/**
+ * This value object represents a Google Analytics 4 property with its corresponding measurement id and optional api secret
+ */
 final class Property
 {
-    public string $apiSecret;
-
     public string $measurementId;
 
-    public function __construct(string $apiSecret, string $measurementId)
+    public ?string $apiSecret;
+
+    public function __construct(string $measurementId, string $apiSecret = null)
     {
         Assert::true(
             str_starts_with($measurementId, 'G-'),
             sprintf('The measurement id does not start with "G-". The given input was: "%s"', $measurementId),
         );
 
-        $this->apiSecret = $apiSecret;
         $this->measurementId = $measurementId;
+        $this->apiSecret = $apiSecret;
     }
 }
