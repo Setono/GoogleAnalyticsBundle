@@ -51,5 +51,7 @@ final class SetonoGoogleAnalyticsExtensionTest extends AbstractExtensionTestCase
         ]);
 
         $this->assertContainerBuilderHasParameter('setono_google_analytics.consent_enabled', true);
+        $this->assertContainerBuilderHasParameter('setono_google_analytics.gtag_enabled', true);
+        $this->assertContainerBuilderHasParameter('setono_google_analytics.tag_manager_enabled', false);
     }
 }

@@ -26,9 +26,15 @@ final class SetonoGoogleAnalyticsExtension extends Extension implements PrependE
         $container->setParameter('setono_google_analytics.properties', $config['gtag']['properties']);
         $container->setParameter('setono_google_analytics.containers', $config['tag_manager']['containers']);
         $container->setParameter('setono_google_analytics.consent_enabled', $config['consent']['enabled']);
+        $container->setParameter('setono_google_analytics.gtag_enabled', $config['gtag']['enabled']);
+        $container->setParameter('setono_google_analytics.tag_manager_enabled', $config['tag_manager']['enabled']);
 
         if (true === $config['tag_manager']['enabled'] && true === $config['gtag']['enabled']) {
             throw new \InvalidArgumentException('You cannot enable both gtag and tag_manager at the same time.');
+        }
+
+        if (false === $config['tag_manager']['enabled'] && false === $config['gtag']['enabled']) {
+            throw new \InvalidArgumentException('You must enable either gtag og tag_manager.');
         }
 
         $loader->load('services.xml');
@@ -39,7 +45,9 @@ final class SetonoGoogleAnalyticsExtension extends Extension implements PrependE
 
         if (true === $config['tag_manager']['enabled']) {
             $loader->load('services/conditional/tag_manager_collection_strategy.xml');
-        } else {
+        }
+
+        if (true === $config['gtag']['enabled']) {
             $loader->load('services/conditional/gtag_collection_strategy.xml');
         }
 

@@ -14,7 +14,7 @@
         "ext-json": "*",
         "psr/event-dispatcher": "^1.0",
         "psr/log": "^1.1 || ^2.0 || ^3.0",
-        "setono/google-analytics-measurement-protocol": "^1.0@alpha",
+        "setono/google-analytics-measurement-protocol": "^1.0.0-alpha.8",
         "setono/tag-bag": "^2.2",
         "setono/tag-bag-bundle": "^3.0",
         "symfony/config": "^5.4 || ^6.0",
