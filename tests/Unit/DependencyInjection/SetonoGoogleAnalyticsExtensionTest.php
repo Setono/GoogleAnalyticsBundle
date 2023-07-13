@@ -54,4 +54,56 @@ final class SetonoGoogleAnalyticsExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasParameter('setono_google_analytics.gtag_enabled', true);
         $this->assertContainerBuilderHasParameter('setono_google_analytics.tag_manager_enabled', false);
     }
+
+    /**
+     * @test
+     */
+    public function it_enables_gtag_with_null_value(): void
+    {
+        $this->load([
+            'gtag' => null,
+        ]);
+
+        $this->assertContainerBuilderHasParameter('setono_google_analytics.gtag_enabled', true);
+        $this->assertContainerBuilderHasParameter('setono_google_analytics.tag_manager_enabled', false);
+    }
+
+    /**
+     * @test
+     */
+    public function it_enables_tag_manager_with_null_value(): void
+    {
+        $this->load([
+            'tag_manager' => null,
+        ]);
+
+        $this->assertContainerBuilderHasParameter('setono_google_analytics.gtag_enabled', false);
+        $this->assertContainerBuilderHasParameter('setono_google_analytics.tag_manager_enabled', true);
+    }
+
+    /**
+     * @test
+     */
+    public function it_throws_exception_if_both_gtag_and_tag_manager_is_enabled(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $this->load([
+            'gtag' => null,
+            'tag_manager' => null,
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_throws_exception_if_both_gtag_and_tag_manager_is_disabled(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $this->load([
+            'gtag' => false,
+            'tag_manager' => false,
+        ]);
+    }
 }
