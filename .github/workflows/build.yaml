@@ -54,6 +54,7 @@ jobs:
             matrix:
                 php-version:
                     - "7.4"
+                    - "8.0"
                     - "8.1"
                     - "8.2"
 
@@ -62,11 +63,26 @@ jobs:
 
                 symfony:
                     - "^5.4"
-                    - "^6.0"
+                    - "~6.0.0"
+                    - "~6.1.0"
+                    - "~6.2.0"
+                    - "~6.3.0"
                 
                 exclude:
                     -   php-version: "7.4"
-                        symfony: "^6.0"
+                        symfony: "~6.0.0"
+                    -   php-version: "7.4"
+                        symfony: "~6.1.0"
+                    -   php-version: "7.4"
+                        symfony: "~6.2.0"
+                    -   php-version: "7.4"
+                        symfony: "~6.3.0"
+                    -   php-version: "8.0"
+                        symfony: "~6.1.0"
+                    -   php-version: "8.0"
+                        symfony: "~6.2.0"
+                    -   php-version: "8.0"
+                        symfony: "~6.3.0"
 
         steps:
             -   name: "Checkout"
@@ -91,7 +107,7 @@ jobs:
                 run: "composer-require-checker check --config-file=$(pwd)/composer-require-checker.json"
 
             -   name: "Run composer-unused/composer-unused"
-                run: "composer-unused || true" # todo remove when https://github.com/shivammathur/setup-php/issues/703 is fixed
+                run: "composer-unused"
 
     static-code-analysis:
         name: "Static Code Analysis"
@@ -102,6 +118,7 @@ jobs:
             matrix:
                 php-version:
                     - "7.4"
+                    - "8.0"
                     - "8.1"
                     - "8.2"
 
@@ -110,11 +127,26 @@ jobs:
 
                 symfony:
                     - "^5.4"
-                    - "^6.0"
+                    - "~6.0.0"
+                    - "~6.1.0"
+                    - "~6.2.0"
+                    - "~6.3.0"
                 
                 exclude:
                     -   php-version: "7.4"
-                        symfony: "^6.0"
+                        symfony: "~6.0.0"
+                    -   php-version: "7.4"
+                        symfony: "~6.1.0"
+                    -   php-version: "7.4"
+                        symfony: "~6.2.0"
+                    -   php-version: "7.4"
+                        symfony: "~6.3.0"
+                    -   php-version: "8.0"
+                        symfony: "~6.1.0"
+                    -   php-version: "8.0"
+                        symfony: "~6.2.0"
+                    -   php-version: "8.0"
+                        symfony: "~6.3.0"
 
         steps:
             -   name: "Checkout"
@@ -147,20 +179,35 @@ jobs:
             matrix:
                 php-version:
                     - "7.4"
+                    - "8.0"
                     - "8.1"
                     - "8.2"
 
                 dependencies:
-                    - "lowest"
                     - "highest"
 
                 symfony:
                     - "^5.4"
-                    - "^6.0"
+                    - "~6.0.0"
+                    - "~6.1.0"
+                    - "~6.2.0"
+                    - "~6.3.0"
                 
                 exclude:
                     -   php-version: "7.4"
-                        symfony: "^6.0"
+                        symfony: "~6.0.0"
+                    -   php-version: "7.4"
+                        symfony: "~6.1.0"
+                    -   php-version: "7.4"
+                        symfony: "~6.2.0"
+                    -   php-version: "7.4"
+                        symfony: "~6.3.0"
+                    -   php-version: "8.0"
+                        symfony: "~6.1.0"
+                    -   php-version: "8.0"
+                        symfony: "~6.2.0"
+                    -   php-version: "8.0"
+                        symfony: "~6.3.0"
 
         steps:
             -   name: "Checkout"

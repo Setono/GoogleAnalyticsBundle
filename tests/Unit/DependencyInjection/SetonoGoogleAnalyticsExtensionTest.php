@@ -37,6 +37,16 @@ final class SetonoGoogleAnalyticsExtensionTest extends AbstractExtensionTestCase
                     ],
                 ],
             ],
+            'filters' => [
+                'client_side' => [
+                    'paths' => [
+                        '/admin',
+                    ],
+                    'hostnames' => [
+                        '*.github.com',
+                    ],
+                ],
+            ],
         ]);
 
         $this->assertContainerBuilderHasParameter('setono_google_analytics.properties', [
@@ -53,6 +63,8 @@ final class SetonoGoogleAnalyticsExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasParameter('setono_google_analytics.consent_enabled', true);
         $this->assertContainerBuilderHasParameter('setono_google_analytics.gtag_enabled', true);
         $this->assertContainerBuilderHasParameter('setono_google_analytics.tag_manager_enabled', false);
+        $this->assertContainerBuilderHasParameter('setono_google_analytics.filters.client_side.paths', ['/admin']);
+        $this->assertContainerBuilderHasParameter('setono_google_analytics.filters.client_side.hostnames', ['*.github.com']);
     }
 
     /**

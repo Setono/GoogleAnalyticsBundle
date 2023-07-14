@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsBundle\DependencyInjection;
 
+use Setono\GoogleAnalyticsBundle\Filter\ClientSide\ClientSideFilterInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -17,7 +18,13 @@ final class SetonoGoogleAnalyticsExtension extends Extension implements PrependE
         /**
          * @psalm-suppress PossiblyNullArgument
          *
-         * @var array{inject_library: bool, gtag: array{enabled: bool, properties: array}, tag_manager: array{enabled: bool, containers: array}, consent: array{enabled: bool}} $config
+         * @var array{
+         *     inject_library: bool,
+         *     gtag: array{enabled: bool, properties: array},
+         *     tag_manager: array{enabled: bool, containers: array},
+         *     filters: array{client_side: array{paths: list<string>, hostnames: list<string>}},
+         *     consent: array{enabled: bool}
+         * } $config
          */
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
@@ -28,6 +35,8 @@ final class SetonoGoogleAnalyticsExtension extends Extension implements PrependE
         $container->setParameter('setono_google_analytics.consent_enabled', $config['consent']['enabled']);
         $container->setParameter('setono_google_analytics.gtag_enabled', $config['gtag']['enabled']);
         $container->setParameter('setono_google_analytics.tag_manager_enabled', $config['tag_manager']['enabled']);
+        $container->setParameter('setono_google_analytics.filters.client_side.paths', $config['filters']['client_side']['paths']);
+        $container->setParameter('setono_google_analytics.filters.client_side.hostnames', $config['filters']['client_side']['hostnames']);
 
         if (true === $config['tag_manager']['enabled'] && true === $config['gtag']['enabled']) {
             throw new \InvalidArgumentException('You cannot enable both gtag and tag_manager at the same time.');
@@ -56,6 +65,10 @@ final class SetonoGoogleAnalyticsExtension extends Extension implements PrependE
         } else {
             $loader->load('services/conditional/consent_disabled.xml');
         }
+
+        $container->registerForAutoconfiguration(ClientSideFilterInterface::class)
+            ->addTag('setono_google_analytics.client_side_filter')
+        ;
     }
 
     public function prepend(ContainerBuilder $container): void

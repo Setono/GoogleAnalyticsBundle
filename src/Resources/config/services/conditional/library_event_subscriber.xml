@@ -6,6 +6,7 @@
         <service id="setono_google_analytics.event_subscriber.tag.library"
                  class="Setono\GoogleAnalyticsBundle\EventSubscriber\Tag\LibrarySubscriber">
             <argument type="service" id="setono_google_analytics.collection_strategy.default"/>
+            <argument type="service" id="setono_google_analytics.filter.client_side.default"/>
             <argument>%setono_google_analytics.inject_library%</argument>
 
             <tag name="kernel.event_subscriber"/>

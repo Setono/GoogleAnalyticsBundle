@@ -17,8 +17,9 @@ final class Property
 
     public function __construct(string $measurementId, string $apiSecret = null)
     {
-        Assert::true(
-            str_starts_with($measurementId, 'G-'),
+        Assert::startsWith(
+            $measurementId,
+            'G-',
             sprintf('The measurement id does not start with "G-". The given input was: "%s"', $measurementId),
         );
 

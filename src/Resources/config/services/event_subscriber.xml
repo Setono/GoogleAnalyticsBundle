@@ -6,6 +6,7 @@
         <service id="setono_google_analytics.event_subscriber.tag.event"
                  class="Setono\GoogleAnalyticsBundle\EventSubscriber\Tag\EventSubscriber">
             <argument type="service" id="setono_google_analytics.collection_strategy.default"/>
+            <argument type="service" id="setono_google_analytics.filter.client_side.default"/>
 
             <tag name="kernel.event_subscriber"/>
         </service>
