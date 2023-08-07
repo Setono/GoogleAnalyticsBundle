@@ -9,7 +9,9 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Setono\GoogleAnalyticsBundle\Event\ServerSideEvent;
 use Setono\GoogleAnalyticsBundle\Message\Command\SendRequest;
+use Setono\GoogleAnalyticsBundle\Provider\ContainerProviderInterface;
 use Setono\GoogleAnalyticsBundle\Provider\PropertyProviderInterface;
+use Setono\GoogleAnalyticsBundle\ValueObject\Property;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Body;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Request;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -26,11 +28,17 @@ final class HandleServerSideEventSubscriber implements EventSubscriberInterface,
 
     private PropertyProviderInterface $propertyProvider;
 
-    public function __construct(MessageBusInterface $commandBus, PropertyProviderInterface $propertyProvider)
+    private ContainerProviderInterface $containerProvider;
+
+    private bool $gtagEnabled;
+
+    public function __construct(MessageBusInterface $commandBus, PropertyProviderInterface $propertyProvider, ContainerProviderInterface $containerProvider, bool $gtagEnabled)
     {
         $this->logger = new NullLogger();
         $this->commandBus = $commandBus;
         $this->propertyProvider = $propertyProvider;
+        $this->containerProvider = $containerProvider;
+        $this->gtagEnabled = $gtagEnabled;
     }
 
     public static function getSubscribedEvents(): array
@@ -48,9 +56,7 @@ final class HandleServerSideEventSubscriber implements EventSubscriberInterface,
             return;
         }
 
-        $properties = $this->propertyProvider->getProperties();
-
-        foreach ($properties as $property) {
+        foreach ($this->getProperties() as $property) {
             if (null === $property->apiSecret) {
                 $this->logger->error(sprintf(
                     'You tried to send an event server side, but the API secret is not set on the property with measurement id %s',
@@ -62,6 +68,26 @@ final class HandleServerSideEventSubscriber implements EventSubscriberInterface,
             $request = new Request($property->apiSecret, $property->measurementId, Body::create($serverSideEvent->clientId)->addEvent($serverSideEvent->event));
             $this->commandBus->dispatch(new SendRequest($request));
         }
+    }
+
+    /**
+     * @return list<Property>
+     */
+    private function getProperties(): array
+    {
+        $properties = [];
+
+        if ($this->gtagEnabled) {
+            return $this->propertyProvider->getProperties();
+        }
+
+        foreach ($this->containerProvider->getContainers() as $container) {
+            if (null !== $container->property) {
+                $properties[] = $container->property;
+            }
+        }
+
+        return $properties;
     }
 
     public function setLogger(LoggerInterface $logger): void
