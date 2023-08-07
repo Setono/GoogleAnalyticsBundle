@@ -8,11 +8,11 @@ use Setono\GoogleAnalyticsBundle\ValueObject\Container;
 
 final class ConfigurationBasedContainerProvider implements ContainerProviderInterface
 {
-    /** @var list<array{container_id: string}> */
+    /** @var list<array{container_id: string, property: array{measurement_id?: string, api_secret?: string}}> */
     private array $containers;
 
     /**
-     * @param list<array{container_id: string}> $containers
+     * @param list<array{container_id: string, property: array{measurement_id?: string, api_secret?: string}}> $containers
      */
     public function __construct(array $containers)
     {
@@ -25,7 +25,7 @@ final class ConfigurationBasedContainerProvider implements ContainerProviderInte
     public function getContainers(): array
     {
         return array_map(
-            static fn (array $container): Container => new Container($container['container_id']),
+            static fn (array $container): Container => Container::fromArray($container),
             $this->containers,
         );
     }

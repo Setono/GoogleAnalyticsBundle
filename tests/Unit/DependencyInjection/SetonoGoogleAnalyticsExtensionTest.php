@@ -83,6 +83,44 @@ final class SetonoGoogleAnalyticsExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
+    public function it_enables_tag_manager_with_no_associated_property(): void
+    {
+        $this->load([
+            'tag_manager' => [
+                'containers' => [
+                    ['id' => 'container_id'],
+                ],
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter('setono_google_analytics.tag_manager_enabled', true);
+        $this->assertContainerBuilderHasParameter('setono_google_analytics.containers', [
+            ['id' => 'container_id', 'property' => []],
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_enables_tag_manager_with_associated_property(): void
+    {
+        $this->load([
+            'tag_manager' => [
+                'containers' => [
+                    ['id' => 'container_id', 'property' => ['measurement_id' => 'G-1234', 'api_secret' => 's3cr3t']],
+                ],
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter('setono_google_analytics.tag_manager_enabled', true);
+        $this->assertContainerBuilderHasParameter('setono_google_analytics.containers', [
+            ['id' => 'container_id', 'property' => ['measurement_id' => 'G-1234', 'api_secret' => 's3cr3t']],
+        ]);
+    }
+
+    /**
+     * @test
+     */
     public function it_enables_tag_manager_with_null_value(): void
     {
         $this->load([
