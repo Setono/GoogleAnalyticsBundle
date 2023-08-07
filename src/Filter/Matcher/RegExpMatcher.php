@@ -13,6 +13,7 @@ final class RegExpMatcher implements MatcherInterface
 
     public function matches(string $value, string $pattern): bool
     {
-        return '' !== $value && preg_match($pattern, $value) === 1;
+        /** @psalm-suppress ArgumentTypeCoercion */
+        return preg_match($pattern, $value) === 1;
     }
 }

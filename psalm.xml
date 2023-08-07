@@ -5,7 +5,7 @@
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
     findUnusedCode="false"
     findUnusedBaselineEntry="true"
-    findUnusedPsalmSuppress="true"
+    findUnusedPsalmSuppress="false"
     errorLevel="1"
     phpVersion="8.1"
 >
