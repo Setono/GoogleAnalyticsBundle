@@ -31,7 +31,7 @@ TODO
 [ico-version]: https://poser.pugx.org/setono/google-analytics-bundle/v/stable
 [ico-license]: https://poser.pugx.org/setono/google-analytics-bundle/license
 [ico-github-actions]: https://github.com/Setono/GoogleAnalyticsBundle/workflows/build/badge.svg
-[ico-code-coverage]: https://codecov.io/gh/Setono/GoogleAnalyticsBundle/branch/master/graph/badge.svg
+[ico-code-coverage]: https://codecov.io/gh/Setono/GoogleAnalyticsBundle/branch/1.x/graph/badge.svg
 
 [link-packagist]: https://packagist.org/packages/setono/google-analytics-bundle
 [link-github-actions]: https://github.com/Setono/GoogleAnalyticsBundle/actions
