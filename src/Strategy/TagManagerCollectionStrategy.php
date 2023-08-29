@@ -8,8 +8,9 @@ use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Setono\GoogleAnalyticsBundle\Provider\ContainerProviderInterface;
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\Event;
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Request;
+use Setono\GoogleAnalyticsEvents\Event\Event;
+use Setono\GoogleAnalyticsEvents\Exception\WriterException;
+use Setono\GoogleAnalyticsEvents\Writer\Writer;
 use Setono\TagBag\Tag\InlineScriptTag;
 use Setono\TagBag\Tag\ScriptTag;
 use Setono\TagBag\Tag\TagInterface;
@@ -23,17 +24,32 @@ final class TagManagerCollectionStrategy implements CollectionStrategyInterface,
 
     private ContainerProviderInterface $containerProvider;
 
-    public function __construct(TagBagInterface $tagBag, ContainerProviderInterface $containerProvider)
-    {
+    private Writer $writer;
+
+    private string $dataLayerVariable;
+
+    public function __construct(
+        TagBagInterface $tagBag,
+        ContainerProviderInterface $containerProvider,
+        Writer $writer,
+        string $dataLayerVariable = 'dataLayer'
+    ) {
         $this->logger = new NullLogger();
         $this->tagBag = $tagBag;
         $this->containerProvider = $containerProvider;
+        $this->writer = $writer;
+        $this->dataLayerVariable = $dataLayerVariable;
     }
 
     public function addLibrary(): void
     {
         $this->tagBag->add(
-            InlineScriptTag::create("var dataLayer=window.dataLayer||[];dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'})")
+            InlineScriptTag::create(sprintf(
+                "var %s=window.%s||[];%s.push({'gtm.start':new Date().getTime(),event:'gtm.js'})",
+                $this->dataLayerVariable,
+                $this->dataLayerVariable,
+                $this->dataLayerVariable
+            ))
                 ->withSection(TagInterface::SECTION_HEAD)
                 ->withPriority(100)
         );
@@ -55,14 +71,18 @@ final class TagManagerCollectionStrategy implements CollectionStrategyInterface,
     public function addEvent(Event $event): void
     {
         try {
-            $json = json_encode($event->getPayload(Request::TRACKING_CONTEXT_CLIENT_SIDE_TAG_MANAGER), \JSON_THROW_ON_ERROR);
-        } catch (\JsonException $e) {
-            $this->logger->error(sprintf('Could not json encode the event %s. The JSON error was: %s', $event->getEventName(), $e->getMessage()));
+            $js = $this->writer->write($event);
+        } catch (WriterException $e) {
+            $this->logger->error(sprintf(
+                'Could not json encode the event %s. The JSON error was: %s',
+                $event::getName(),
+                $e->getMessage()
+            ));
 
-            return;
+            $js = sprintf("console.error('Could not json encode the event %s');", $event::getName());
         }
 
-        $this->tagBag->add(InlineScriptTag::create(sprintf('dataLayer.push({ ecommerce: null }); dataLayer.push(%s);', $json)));
+        $this->tagBag->add(InlineScriptTag::create($js));
     }
 
     public function setLogger(LoggerInterface $logger): void

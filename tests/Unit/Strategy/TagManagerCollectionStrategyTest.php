@@ -9,7 +9,8 @@ use Prophecy\PhpUnit\ProphecyTrait;
 use Setono\GoogleAnalyticsBundle\Provider\ContainerProviderInterface;
 use Setono\GoogleAnalyticsBundle\Strategy\TagManagerCollectionStrategy;
 use Setono\GoogleAnalyticsBundle\ValueObject\Container;
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\PurchaseEvent;
+use Setono\GoogleAnalyticsEvents\Event\PurchaseEvent;
+use Setono\GoogleAnalyticsEvents\Writer\TagManagerWriter;
 use Setono\TagBag\Renderer\ElementRenderer;
 use Setono\TagBag\TagBag;
 
@@ -26,7 +27,7 @@ final class TagManagerCollectionStrategyTest extends TestCase
         $containerProvider = $this->prophesize(ContainerProviderInterface::class);
         $containerProvider->getContainers()->willReturn([new Container('GTM-FAD123')]);
 
-        $strategy = new TagManagerCollectionStrategy($tagBag, $containerProvider->reveal());
+        $strategy = new TagManagerCollectionStrategy($tagBag, $containerProvider->reveal(), new TagManagerWriter());
         $strategy->addLibrary();
 
         self::assertSame(
@@ -47,11 +48,11 @@ HTML,
 
         $event = new PurchaseEvent('TRANS_1234');
 
-        $strategy = new TagManagerCollectionStrategy($tagBag, $containerProvider->reveal());
+        $strategy = new TagManagerCollectionStrategy($tagBag, $containerProvider->reveal(), new TagManagerWriter());
         $strategy->addEvent($event);
 
         self::assertSame(
-            '<script>dataLayer.push({ ecommerce: null }); dataLayer.push({"event":"purchase","ecommerce":{"transaction_id":"TRANS_1234"}});</script>',
+            '<script>dataLayer.push({ ecommerce: null }); dataLayer.push({"ecommerce":{"transaction_id":"TRANS_1234"},"event":"purchase"});</script>',
             $tagBag->renderAll()
         );
     }

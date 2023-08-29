@@ -12,7 +12,6 @@ use Setono\GoogleAnalyticsBundle\Message\Command\SendRequest;
 use Setono\GoogleAnalyticsBundle\Provider\ContainerProviderInterface;
 use Setono\GoogleAnalyticsBundle\Provider\PropertyProviderInterface;
 use Setono\GoogleAnalyticsBundle\ValueObject\Property;
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Body;
 use Setono\GoogleAnalyticsMeasurementProtocol\Request\Request;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -67,7 +66,9 @@ final class HandleServerSideEventSubscriber implements EventSubscriberInterface,
 
                 continue;
             }
-            $request = new Request($property->apiSecret, $property->measurementId, Body::create($serverSideEvent->clientId)->addEvent($serverSideEvent->event));
+
+            $request = (new Request($property->apiSecret, $property->measurementId, $serverSideEvent->clientId))->addEvent($serverSideEvent->event);
+
             $this->commandBus->dispatch(new SendRequest($request));
         }
     }

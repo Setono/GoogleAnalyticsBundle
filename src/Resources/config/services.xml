@@ -10,5 +10,6 @@
         <import resource="services/message.xml"/>
         <import resource="services/provider.xml"/>
         <import resource="services/strategy.xml"/>
+        <import resource="services/writer.xml"/>
     </imports>
 </container>

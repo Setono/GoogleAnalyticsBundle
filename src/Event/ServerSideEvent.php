@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Setono\GoogleAnalyticsBundle\Event;
 
 use Setono\GoogleAnalyticsBundle\ValueObject\Property;
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\Event;
+use Setono\GoogleAnalyticsEvents\Event\Event;
 use Symfony\Contracts\EventDispatcher\Event as StoppableEvent;
 
 /**

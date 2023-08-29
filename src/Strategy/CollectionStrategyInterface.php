@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\GoogleAnalyticsBundle\Strategy;
 
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\Event;
+use Setono\GoogleAnalyticsEvents\Event\Event;
 
 interface CollectionStrategyInterface
 {

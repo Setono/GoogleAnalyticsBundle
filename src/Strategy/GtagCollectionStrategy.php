@@ -10,8 +10,9 @@ use Psr\Log\NullLogger;
 use Setono\Consent\Consents;
 use Setono\GoogleAnalyticsBundle\ConsentChecker\ConsentCheckerInterface;
 use Setono\GoogleAnalyticsBundle\Provider\PropertyProviderInterface;
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Body\Event\Event;
-use Setono\GoogleAnalyticsMeasurementProtocol\Request\Request;
+use Setono\GoogleAnalyticsEvents\Event\Event;
+use Setono\GoogleAnalyticsEvents\Exception\WriterException;
+use Setono\GoogleAnalyticsEvents\Writer\Writer;
 use Setono\TagBag\Tag\ConsentableScriptTag;
 use Setono\TagBag\Tag\InlineScriptTag;
 use Setono\TagBag\Tag\ScriptTag;
@@ -28,15 +29,19 @@ final class GtagCollectionStrategy implements CollectionStrategyInterface, Logge
 
     private ConsentCheckerInterface $consentChecker;
 
+    private Writer $writer;
+
     public function __construct(
         TagBagInterface $tagBag,
         PropertyProviderInterface $propertyProvider,
-        ConsentCheckerInterface $consentChecker
+        ConsentCheckerInterface $consentChecker,
+        Writer $writer
     ) {
         $this->logger = new NullLogger();
         $this->tagBag = $tagBag;
         $this->propertyProvider = $propertyProvider;
         $this->consentChecker = $consentChecker;
+        $this->writer = $writer;
     }
 
     public function addLibrary(): void
@@ -85,14 +90,16 @@ final class GtagCollectionStrategy implements CollectionStrategyInterface, Logge
     private function generateGtag(Event $event): string
     {
         try {
-            $json = json_encode($event->getPayload(Request::TRACKING_CONTEXT_CLIENT_SIDE), \JSON_THROW_ON_ERROR);
-        } catch (\JsonException $e) {
-            $this->logger->error(sprintf('Could not json encode the event %s. The JSON error was: %s', $event->getEventName(), $e->getMessage()));
+            return $this->writer->write($event);
+        } catch (WriterException $e) {
+            $this->logger->error(sprintf(
+                'Could not json encode the event %s. The JSON error was: %s',
+                $event::getName(),
+                $e->getMessage()
+            ));
 
-            return sprintf("console.error('Could not json encode the event %s');", $event->getEventName());
+            return sprintf("console.error('Could not json encode the event %s');", $event::getName());
         }
-
-        return sprintf("gtag('event', '%s', %s);", $event->getEventName(), $json);
     }
 
     private static function getConsentType(): string
