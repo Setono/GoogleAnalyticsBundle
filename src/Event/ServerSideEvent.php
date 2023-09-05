@@ -21,8 +21,8 @@ final class ServerSideEvent extends StoppableEvent
     public array $properties;
 
     /**
-     * @param string|null $clientId If you do not provide a client id, the client id from the _ga cookie will be used
-     * @param list<Property> $properties If you do not provide properties, the properties will be resolved from the configured properties or containers
+     * @param string|null $clientId If you do not provide a client id, the client id from the \Setono\GoogleAnalyticsBundle\Context\ClientIdContextInterface will be used
+     * @param list<Property> $properties If you do not provide properties, the properties will be resolved from the configured properties or containers. See the \Setono\GoogleAnalyticsBundle\Provider\PropertyProviderInterface or \Setono\GoogleAnalyticsBundle\Provider\ContainerProviderInterface respectively
      */
     public function __construct(Event $event, string $clientId = null, array $properties = [])
     {
