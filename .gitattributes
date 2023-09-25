@@ -7,5 +7,6 @@
 /phpunit.xml.dist               export-ignore
 /psalm.xml                      export-ignore
 /README.md                      export-ignore
-/composer-require-checker.json  expoort-ignore
-/rector.php                     expoort-ignore
+/composer-require-checker.json  export-ignore
+/rector.php                     export-ignore
+/composer-unused.php            export-ignore
