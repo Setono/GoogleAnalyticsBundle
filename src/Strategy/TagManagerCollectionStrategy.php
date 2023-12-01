@@ -56,8 +56,8 @@ final class TagManagerCollectionStrategy implements CollectionStrategyInterface,
 
         $containers = $this->containerProvider->getContainers();
 
-        if (count($containers) > 0) {
-            foreach ($this->containerProvider->getContainers() as $container) {
+        if ([] !== $containers) {
+            foreach ($containers as $container) {
                 $this->tagBag->add(ScriptTag::create(sprintf(
                     'https://www.googletagmanager.com/gtm.js?id=%s',
                     $container->id
